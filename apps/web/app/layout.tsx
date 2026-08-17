@@ -3,5 +3,6 @@ import './globals.css';
 import './theme-overrides.css';
 import './cozy-overrides.css';
 import './interaction-overrides.css';
+import './guide-overrides.css';
 export const metadata: Metadata = { title: 'ChessApex — Climb Higher', description: 'A delightful chess tutor built around deliberate practice.' };
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) { return <html lang="en"><body>{children}</body></html>; }
