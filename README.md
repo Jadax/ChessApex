@@ -13,4 +13,6 @@ pnpm install
 pnpm dev
 ```
 
-Set `DATABASE_URL` to a Neon connection string and apply `neon/schema.sql`. The web health endpoint is available at `/api/health`.
+Set `DATABASE_URL` to a Neon connection string and apply `neon/schema.sql` for the server deployment.
+
+The static web experience is deployed through GitHub Pages at `https://jadax.github.io/ChessApex/`. Neon-backed persistence requires a server deployment.
