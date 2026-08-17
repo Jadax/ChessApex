@@ -1,0 +1,13 @@
+{
+  "name": "@chessapex/shared",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./engine": "./src/engine/index.ts",
+    "./pedagogy": "./src/pedagogy/index.ts"
+  },
+  "scripts": { "typecheck": "tsc --noEmit", "build": "tsc --noEmit", "lint": "tsc --noEmit" },
+  "dependencies": { "chess.js": "^1.0.0" }
+}

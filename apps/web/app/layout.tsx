@@ -1,0 +1,4 @@
+import type { Metadata } from 'next';
+import './globals.css';
+export const metadata: Metadata = { title: 'ChessApex — Climb Higher', description: 'A delightful chess tutor built around deliberate practice.' };
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) { return <html lang="en"><body>{children}</body></html>; }

@@ -1,0 +1,3 @@
+export interface TablebaseResult { wdl: -2|-1|0|1|2; dtz?: number; bestMove?: string; source: 'syzygy'|'unavailable'; }
+/** Adapter boundary for a Syzygy API/worker. It is intentionally safe when no tablebase asset is configured. */
+export async function probeTablebase(_fen: string, endpoint = ''): Promise<TablebaseResult> { if (!endpoint) return { wdl: 0, source: 'unavailable' }; try { const response = await fetch(`${endpoint}?fen=${encodeURIComponent(_fen)}`); if (!response.ok) throw new Error('tablebase unavailable'); return await response.json() as TablebaseResult; } catch { return { wdl: 0, source: 'unavailable' }; } }
