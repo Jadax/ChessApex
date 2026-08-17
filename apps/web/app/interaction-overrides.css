@@ -1,0 +1,4 @@
+.board-frame,.trainer-board{overflow:visible}
+.board,.trainer-board>div{overflow:visible}
+.board-frame>div:last-child{min-width:0;width:100%}
+.board [class*="notation"]{z-index:5;pointer-events:none}
