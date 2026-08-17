@@ -1,0 +1,16 @@
+'use client';
+import { useState } from 'react';
+
+type Theory = { name: string; family: string; moves: string; idea: string; method: string };
+const theories: Theory[] = [
+  { name: 'London System', family: 'White repertoire', moves: '1.d4 · 2.Nf3 · 3.Bf4 · e3 · c3', idea: 'A resilient setup: develop the light bishop before e3, build a solid centre, then choose a kingside or queenside plan.', method: 'Move trainer: ask what changed after ...c5, ...Qb6 and ...Ne4.' },
+  { name: 'Italian Game', family: 'Open game', moves: '1.e4 e5 2.Nf3 Nc6 3.Bc4', idea: 'Develop quickly and pressure f7. The central break d4 is the long-term lever.', method: 'Principle drill: development, king safety, then the centre break.' },
+  { name: "Queen's Gambit", family: 'Closed centre', moves: '1.d4 d5 2.c4', idea: 'Challenge Black’s d5 pawn and learn when to recapture, hold the centre, or develop with tempo.', method: 'Compare candidate moves: cxd5, Nc3 and e3 against the opponent’s plan.' },
+  { name: 'Sicilian Defence', family: 'Black vs 1.e4', moves: '1.e4 c5', idea: 'Black gives White a central pawn majority in exchange for asymmetry and active counterplay.', method: 'Pattern recall: ...d5, ...Nf6 and queenside pressure are common freeing ideas.' },
+  { name: 'Caro-Kann Defence', family: 'Black vs 1.e4', moves: '1.e4 c6 2.d4 d5', idea: 'Support the d5 break with a sound pawn structure and develop the light bishop outside the chain.', method: 'Structure lesson: identify the good bishop before closing the centre.' },
+  { name: 'French Defence', family: 'Black vs 1.e4', moves: '1.e4 e6 2.d4 d5', idea: 'Invite a strong White centre, then attack its base with ...c5 and ...f6.', method: 'Plan-first review: name the pawn break before choosing a piece move.' },
+  { name: 'King’s Indian Defence', family: 'Black vs 1.d4', moves: '1.d4 Nf6 2.c4 g6 3.Nc3 Bg7', idea: 'Allow space, finish development, and strike the centre with ...e5 or ...c5.', method: 'Calculation tree: compare a central break with a quiet improving move.' },
+  { name: 'Essential endgames', family: 'Conversion', moves: 'K+P · opposition · rook activity · basic mates', idea: 'The king becomes a fighting piece. Learn opposition, key squares, checks from behind, and active rooks.', method: 'Spaced repetition: solve from both sides until the technique is automatic.' },
+];
+
+export function TheoryLibrary() { const [selected, setSelected] = useState<Theory>(theories[0]!); return <section className="theory-card"><div className="card-heading"><div><span className="mini-label">THEORY & MOVE LAB</span><h2>Learn the map, then play the position.</h2></div><span className="muted">{theories.length} PATHS</span></div><div className="theory-layout"><div className="theory-list">{theories.map((theory) => <button key={theory.name} className={selected.name === theory.name ? 'theory-item active' : 'theory-item'} onClick={() => setSelected(theory)}><span>♞</span><div><b>{theory.name}</b><small>{theory.family}</small></div><i>›</i></button>)}</div><article className="theory-detail"><span>{selected.family.toUpperCase()}</span><h3>{selected.name}</h3><code>{selected.moves}</code><p>{selected.idea}</p><div><strong>ChessApex method</strong><small>{selected.method}</small></div><button className="theory-cta">Open move trainer ↗</button></article></div></section>; }
