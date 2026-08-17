@@ -43,10 +43,25 @@ export class GameEngine {
   }
 
   async playWeakAIMove(): Promise<EvaluatedMove | null> {
+    const before = this.chess.fen();
     const moves = this.chess.moves({ verbose: true }) as unknown as CandidateMove[];
-    const chosen = this.weakAI.choose(moves, (move) => move.to === 'e4' || move.to === 'd4' ? 0.2 : 0, this.chess.turn());
+    const chosen = this.weakAI.choose(moves, (move) => this.scoreAIMove(before, move), this.chess.turn());
     if (!chosen) return null;
     return this.play(chosen.from as Square, chosen.to as Square, chosen.promotion as 'q'|'r'|'b'|'n'|undefined);
+  }
+
+  /** GRANDMASTER-NOTE: score every legal move with simple chess principles first; WeakAI then adds level-scaled noise. */
+  private scoreAIMove(before: string, candidate: CandidateMove): number {
+    const position = new Chess(before);
+    const move = position.move({ from: candidate.from as Square, to: candidate.to as Square, ...(candidate.promotion ? { promotion: candidate.promotion as 'q'|'r'|'b'|'n' } : {}) });
+    if (!move) return -999;
+    const material = evaluateMaterial(position.fen()) / 100;
+    const capture = move.captured === 'q' ? 9 : move.captured === 'r' ? 5 : move.captured === 'b' || move.captured === 'n' ? 3 : move.captured ? 1 : 0;
+    const centre = ['d4', 'e4', 'd5', 'e5'].includes(move.to) ? .35 : ['c4', 'f4', 'c5', 'f5'].includes(move.to) ? .15 : 0;
+    const development = move.piece === 'n' || move.piece === 'b' ? .18 : 0;
+    const kingSafety = move.san.includes('O-O') ? .6 : 0;
+    const forcing = move.san.includes('#') ? 12 : move.san.includes('+') ? 1.2 : 0;
+    return material + capture + centre + development + kingSafety + forcing;
   }
 
   private feedback(move: Move, delta: number): string {
