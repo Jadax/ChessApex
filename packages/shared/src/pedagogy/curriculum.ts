@@ -1,0 +1,9 @@
+import type { Tier } from './types';
+export interface CurriculumModule { id:string; tier:Tier; title:string; description:string; methods:string[]; topics:string[]; }
+export const CURRICULUM: CurriculumModule[] = [
+  { id:'foundation',tier:'foundation',title:'See the board',description:'Build reliable habits before memorising openings.',methods:['active recall','cognitive-load chunking','mini-games'],topics:['piece movement and value','checks, captures, threats','mate patterns','king safety','opening principles'] },
+  { id:'developing',tier:'developing',title:'Build a position',description:'Turn development and structure into a repeatable plan.',methods:['spaced repetition','move trainers','self-explanation'],topics:['centre control','development and tempi','castling','pawn breaks','basic endgames','opening families'] },
+  { id:'tactical',tier:'tactical',title:'Calculate with purpose',description:'Recognise forcing patterns and calculate without guessing.',methods:['pattern recognition','guess-the-move','error-based drills'],topics:['forks and pins','skewers','discovered attacks','deflection','clearance','sacrifices','calculation trees'] },
+  { id:'strategic',tier:'strategic',title:'Choose better plans',description:'Read the position: weaknesses, pieces, space, and transitions.',methods:['model games','compare candidate moves','human-first analysis'],topics:['pawn structures','outposts','bad pieces','minority attacks','open files','prophylaxis','exchange decisions'] },
+  { id:'expert',tier:'expert',title:'Think like a competitor',description:'Refine preparation, practical decisions, and endgame conversion.',methods:['engine-assisted review','repertoire rehearsal','deliberate practice'],topics:['deep opening preparation','dynamic evaluation','time management','tablebase technique','opponent profiling','novelty discovery','tournament review'] }
+];

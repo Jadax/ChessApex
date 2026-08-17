@@ -1,0 +1,4 @@
+'use client';
+import { useState } from 'react';
+import { CURRICULUM, type CurriculumModule } from '@chessapex/shared';
+export function ApexPath(){const[selected,setSelected]=useState<CurriculumModule>();return <div className="path-card"><div className="card-heading"><h2>Apex path</h2><span className="muted">5 TIERS</span></div><div className="path-list">{CURRICULUM.map((module,index)=><button className="path-item" key={module.id} onClick={()=>setSelected(module)}><span>0{index+1}</span><div><b>{module.title}</b><small>{module.description}</small></div><i>›</i></button>)}</div>{selected&&<div className="path-detail"><button onClick={()=>setSelected(undefined)}>×</button><span>{selected.tier.toUpperCase()} TIER</span><h3>{selected.title}</h3><p>{selected.description}</p><strong>Learning methods</strong><small>{selected.methods.join(' · ')}</small><strong>Knowledge map</strong><small>{selected.topics.join(' · ')}</small></div>}</div>}
